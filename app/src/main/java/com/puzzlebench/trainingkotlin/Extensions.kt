@@ -10,7 +10,8 @@ fun ImageView.loadUrl(url: String) {
     Picasso.with(context).load(url).into(this)
 }
 
-// eg: extension function
-fun Context.showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+// eg: extension function default parameter
+fun Context.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) = Toast.makeText(this, message, duration).show()
+
 // eg: extension function
 fun RecyclerView.ViewHolder.showToast(message: String) = itemView.context.showToast(message)

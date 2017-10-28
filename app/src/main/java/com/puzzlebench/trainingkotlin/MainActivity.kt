@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent (this, DetailActivity :: class.java)
             intent.putExtra(DetailActivity.EXTRA_ID,item.id)
             startActivity(intent)
-            showToast("selected  ${item.title}") //eg String Templates
+            showToast("selected  ${item.title}", Toast.LENGTH_LONG) //eg String Templates
         }
 
 
