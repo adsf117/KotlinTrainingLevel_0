@@ -1,7 +1,10 @@
-package com.puzzlebench.trainingkotlin
+package com.puzzlebench.trainingkotlin.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.puzzlebench.trainingkotlin.R
+import com.puzzlebench.trainingkotlin.data.getItems
+import com.puzzlebench.trainingkotlin.extension.getImageByUrl
 import kotlinx.android.synthetic.main.view_item.*
 
 class DetailActivity : AppCompatActivity() {
@@ -18,7 +21,7 @@ class DetailActivity : AppCompatActivity() {
         val item = getItems().firstOrNull { it.id == id }
         if (item != null) {
             item_title.text = item.title
-            item_image.loadUrl(item.url)
+            item_image.getImageByUrl(item.url)
         }
     }
 }

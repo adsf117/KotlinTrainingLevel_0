@@ -1,9 +1,13 @@
-package com.puzzlebench.trainingkotlin
+package com.puzzlebench.trainingkotlin.adapter
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.puzzlebench.trainingkotlin.R
+import com.puzzlebench.trainingkotlin.data.Item
+import com.puzzlebench.trainingkotlin.extension.getImageByUrl
+import com.puzzlebench.trainingkotlin.extension.inflate
+import com.puzzlebench.trainingkotlin.extension.showToast
 import kotlinx.android.synthetic.main.view_item.view.*
 
 
@@ -11,7 +15,7 @@ class ItemAdapter(val items: List<Item>, val listener: (Item) -> Unit) : Recycle
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.view_item, parent, false)
+        val v = parent.inflate(R.layout.view_item)
         return ViewHolder(v)
     }
 
@@ -19,7 +23,7 @@ class ItemAdapter(val items: List<Item>, val listener: (Item) -> Unit) : Recycle
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.itemView) {
         val item = items[position]
         item_title.text = item.title
-        item_image.loadUrl(item.url)
+        item_image.getImageByUrl(item.url)
         holder.showToast("Loading ${item.title}")
         setOnClickListener { listener(item) }
 
