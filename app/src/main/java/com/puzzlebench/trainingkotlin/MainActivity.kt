@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent (this, DetailActivity :: class.java)
             intent.putExtra(DetailActivity.EXTRA_ID,item.id)
             startActivity(intent)
+            showToast("selected  ${item.title}") //eg String Templates
         }
 
 
