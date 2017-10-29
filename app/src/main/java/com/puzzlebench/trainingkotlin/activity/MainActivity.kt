@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        recycle.layoutManager = GridLayoutManager(this, 2) as RecyclerView.LayoutManager?
+        recycle.layoutManager = GridLayoutManager(this, 2)
         recycle.adapter = ItemAdapter(getItems()) { item ->
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra(DetailActivity.EXTRA_ID, item.id)
