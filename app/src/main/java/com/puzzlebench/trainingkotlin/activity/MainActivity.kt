@@ -18,11 +18,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recycle.layoutManager = GridLayoutManager(this, 2)
-        recycle.adapter = ItemAdapter(getItems()) { item ->
+        recycle.adapter = ItemAdapter(getItems()) {
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.EXTRA_ID, item.id)
+            intent.putExtra(DetailActivity.EXTRA_ID, it.id)
             startActivity(intent)
-            showToast("selected  ${item.title}", Toast.LENGTH_LONG) //eg String Templates
+            showToast("selected  ${it.title}", Toast.LENGTH_LONG) //eg String Templates
         }
 
 
