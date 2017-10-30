@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.puzzlebench.trainingkotlin.R
-import com.puzzlebench.trainingkotlin.data.Item
-import com.puzzlebench.trainingkotlin.data.Item.Type
+import com.puzzlebench.trainingkotlin.Item
+import com.puzzlebench.trainingkotlin.Item.Type
 import com.puzzlebench.trainingkotlin.extension.findTypeById
 import com.puzzlebench.trainingkotlin.extension.getImageByUrl
 import com.puzzlebench.trainingkotlin.extension.inflate
