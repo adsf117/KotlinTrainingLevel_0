@@ -1,11 +1,11 @@
 package com.puzzlebench.trainingkotlin.activity
 
-import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.widget.Toast
+import android.view.Menu
+import android.view.MenuItem
+import com.puzzlebench.trainingkotlin.Item
 import com.puzzlebench.trainingkotlin.R
 import com.puzzlebench.trainingkotlin.adapter.ItemAdapter
 import com.puzzlebench.trainingkotlin.data.getItems
@@ -14,17 +14,35 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    var adapter = ItemAdapter(getItems()) { showToast(it.title) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recycle.layoutManager = GridLayoutManager(this, 2)
-        recycle.adapter = ItemAdapter(getItems()) {
+        recycle.adapter = adapter
+        /*ItemAdapter(getItems()) {
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra(DetailActivity.EXTRA_ID, it.id)
             startActivity(intent)
             showToast("selected  ${it.title}", Toast.LENGTH_LONG) //eg String Templates
+        }*/
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.city_filter__menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        adapter.items = getItems().let { items ->
+            when (item.itemId) {
+                R.id.filter_all -> items
+                R.id.filter_photos -> items.filter { it.type == Item.Type.PHOTO }
+                R.id.filter_videos -> items.filter { it.type == Item.Type.VIDEO }
+                else -> emptyList()
+            }
         }
-
-
+        return super.onOptionsItemSelected(item)
     }
 }
