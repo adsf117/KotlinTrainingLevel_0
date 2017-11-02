@@ -28,7 +28,7 @@ class ItemAdapter(dataItems: List<Item>, val listener: (Item) -> Unit) : Recycle
         val item = items[position]
         val item_title = findTypeById<TextView>(R.id.item_title) //this is unnecessary becaue de Kotlink androi extention do it but  is just to show how implement a reified function extension
         item_title.text = item.title
-        item_image.getImageByUrl(item.url)
+        item_image.getImageByUrl(item.imageUrl)
         holder.showToast("Loading ${item.title}")
         item_media_video_indicator.visibility = when (item.type) {
             Type.PHOTO -> View.GONE

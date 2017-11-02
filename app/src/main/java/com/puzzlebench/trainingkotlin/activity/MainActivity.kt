@@ -8,13 +8,13 @@ import android.view.MenuItem
 import com.puzzlebench.trainingkotlin.Item
 import com.puzzlebench.trainingkotlin.R
 import com.puzzlebench.trainingkotlin.adapter.ItemAdapter
-import com.puzzlebench.trainingkotlin.data.getItems
+import com.puzzlebench.trainingkotlin.data.ItemProvider
 import com.puzzlebench.trainingkotlin.extension.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    var adapter = ItemAdapter(getItems()) { showToast(it.title) }
+    var adapter = ItemAdapter(ItemProvider.data) { showToast(it.title) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        adapter.items = getItems().let { items ->
+        adapter.items = ItemProvider.data.let { items ->
             when (item.itemId) {
                 R.id.filter_all -> items
                 R.id.filter_photos -> items.filter { it.type == Item.Type.PHOTO }
