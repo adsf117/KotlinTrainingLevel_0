@@ -4,19 +4,20 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.puzzlebench.trainingkotlin.R
 import com.puzzlebench.trainingkotlin.Item
 import com.puzzlebench.trainingkotlin.Item.Type
+import com.puzzlebench.trainingkotlin.R
 import com.puzzlebench.trainingkotlin.extension.findTypeById
 import com.puzzlebench.trainingkotlin.extension.getImageByUrl
 import com.puzzlebench.trainingkotlin.extension.inflate
 import com.puzzlebench.trainingkotlin.extension.showToast
 import kotlinx.android.synthetic.main.view_item.view.*
+import kotlin.properties.Delegates
 
 
-class ItemAdapter(val items: List<Item>, val listener: (Item) -> Unit) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+class ItemAdapter(dataItems: List<Item>, val listener: (Item) -> Unit) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
-
+    var items: List<Item> by Delegates.observable(dataItems) { _, _, _ -> notifyDataSetChanged() }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = parent.inflate(R.layout.view_item)
         return ViewHolder(v)
