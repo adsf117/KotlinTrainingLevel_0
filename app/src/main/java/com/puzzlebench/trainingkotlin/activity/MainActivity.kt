@@ -37,20 +37,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        ItemProvider.dataAsyc { items ->
-            adapter.items =
-                    when (item.itemId) {
-                        R.id.filter_all -> items
-                        R.id.filter_photos -> items.filter { it.type == Item.Type.PHOTO }
-                        R.id.filter_videos -> items.filter { it.type == Item.Type.VIDEO }
-                        else -> emptyList()
-                    }
-        }
+        val filterItems: FilterItems =
+                when (item.itemId) {
+                    R.id.filter_photos -> FilterItems.ByType(Item.Type.PHOTO)
+                    R.id.filter_videos -> FilterItems.ByType(Item.Type.VIDEO)
+                    else -> FilterItems.None
+                }
+        filterItemsByType(filterItems)
         return super.onOptionsItemSelected(item)
     }
 
     private fun goToDetailActivity(item: Item) {
         showToast(String.format(resources.getString(R.string.selected_message), item.title), Toast.LENGTH_LONG)
         startActivity<DetailActivity>(DetailActivity.EXTRA_ID to item.id)
+    }
+
+    fun filterItemsByType(filterItems: FilterItems) {
+        ItemProvider.dataAsyc { items ->
+            adapter.items =
+                    when (filterItems) {
+                        FilterItems.None -> items
+                        is FilterItems.ByType -> items.filter { it.type == filterItems.type }
+                    }
+        }
+    }
+
+    sealed class FilterItems {
+        object None : FilterItems() // we use a object because do noting
+        class ByType(val type: Item.Type) : FilterItems()
     }
 }
