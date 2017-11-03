@@ -18,10 +18,12 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         val id = intent.getLongExtra(EXTRA_ID, -1)
-        val item = ItemProvider.data.firstOrNull { it.id == id }
-        if (item != null) {
-            item_title.text = item.title
-            item_image.getImageByUrl(item.imageUrl)
+        ItemProvider.dataAsyc {
+            val item = it.firstOrNull { it.id == id }
+            if (item != null) {
+                item_title.text = item.title
+                item_image.getImageByUrl(item.imageUrl)
+            }
         }
     }
 }

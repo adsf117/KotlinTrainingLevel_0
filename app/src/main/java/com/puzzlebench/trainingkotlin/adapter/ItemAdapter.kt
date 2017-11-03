@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.view_item.view.*
 import kotlin.properties.Delegates
 
 
-class ItemAdapter(dataItems: List<Item>, val listener: (Item) -> Unit) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+class ItemAdapter(dataItems: List<Item> = emptyList(), val listener: (Item) -> Unit) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     var items: List<Item> by Delegates.observable(dataItems) { _, _, _ -> notifyDataSetChanged() }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
