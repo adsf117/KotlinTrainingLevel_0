@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import com.puzzlebench.trainingkotlin.FilterItems
 import com.puzzlebench.trainingkotlin.Item
 import com.puzzlebench.trainingkotlin.R
 import com.puzzlebench.trainingkotlin.adapter.ItemAdapter
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
-    private val SELECTED_MESSAGE = "selected"
+
     var adapter = ItemAdapter { item -> goToDetailActivity(item) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,10 +61,5 @@ class MainActivity : AppCompatActivity() {
                         is FilterItems.ByType -> items.filter { it.type == filterItems.type }
                     }
         }
-    }
-
-    sealed class FilterItems {
-        object None : FilterItems() // we use a object because do noting
-        class ByType(val type: Item.Type) : FilterItems()
     }
 }
