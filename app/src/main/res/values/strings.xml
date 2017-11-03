@@ -3,4 +3,6 @@
     <string name="show_all_items">All</string>
     <string name="filter_by_photos">Photos</string>
     <string name="filter_by_videos">Videos</string>
+    <string name="selected_message">Selected %s</string>
+    <string name="loading_message">Loading %s</string>
 </resources>

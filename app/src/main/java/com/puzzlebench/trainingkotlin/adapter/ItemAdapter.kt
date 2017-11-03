@@ -29,7 +29,7 @@ class ItemAdapter(dataItems: List<Item> = emptyList(), val listener: (Item) -> U
         val item_title = findTypeById<TextView>(R.id.item_title) //this is unnecessary becaue de Kotlink androi extention do it but  is just to show how implement a reified function extension
         item_title.text = item.title
         item_image.getImageByUrl(item.imageUrl)
-        holder.showToast("Loading ${item.title}")
+        holder.showToast(String.format(resources.getString(R.string.loading_message), item.title))
         item_media_video_indicator.visibility = when (item.type) {
             Type.PHOTO -> View.GONE
             Type.VIDEO -> View.VISIBLE

@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToDetailActivity(item: Item) {
-        showToast("$SELECTED_MESSAGE${item.title}", Toast.LENGTH_LONG)
+        showToast(String.format(resources.getString(R.string.selected_message), item.title), Toast.LENGTH_LONG)
         startActivity<DetailActivity>(DetailActivity.EXTRA_ID to item.id)
     }
 }
