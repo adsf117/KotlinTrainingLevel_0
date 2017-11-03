@@ -6,16 +6,18 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.puzzlebench.trainingkotlin.Item
 import com.puzzlebench.trainingkotlin.R
 import com.puzzlebench.trainingkotlin.adapter.ItemAdapter
 import com.puzzlebench.trainingkotlin.data.ItemProvider
 import com.puzzlebench.trainingkotlin.extension.showToast
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
-
-    var adapter = ItemAdapter { showToast(it.title) }
+    private val SELECTED_MESSAGE = "selected"
+    var adapter = ItemAdapter { item -> goToDetailActivity(item) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,12 +28,6 @@ class MainActivity : AppCompatActivity() {
         }
         recycle.layoutManager = GridLayoutManager(this, 2)
         recycle.adapter = adapter
-        /*ItemAdapter(getItems()) {
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.EXTRA_ID, it.id)
-            startActivity(intent)
-            showToast("selected  ${it.title}", Toast.LENGTH_LONG) //eg String Templates
-        }*/
 
     }
 
@@ -51,5 +47,10 @@ class MainActivity : AppCompatActivity() {
                     }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun goToDetailActivity(item: Item) {
+        showToast("$SELECTED_MESSAGE${item.title}", Toast.LENGTH_LONG)
+        startActivity<DetailActivity>(DetailActivity.EXTRA_ID to item.id)
     }
 }
